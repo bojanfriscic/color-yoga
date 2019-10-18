@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Navbar.css';
 import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css';
@@ -32,7 +33,7 @@ class Navbar extends React.Component {
     return (
       <header className="navbar">
         <div className="logo">
-          <a href="/">React Palette</a>
+          <Link to="/">React Palette</Link>
         </div>{/* /.logo */}
 
         <div className="slider-container">
