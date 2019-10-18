@@ -4,6 +4,10 @@ import { styles } from './PaletteList.styles';
 import MiniPalette from '../MiniPalette/MiniPalette';
 
 class PaletteList extends React.Component {
+  goToPalette(id) {
+    this.props.history.push(`/palette/${id}`);
+  }
+  
   render() {
     const { palettes, classes } = this.props;
 
@@ -16,7 +20,10 @@ class PaletteList extends React.Component {
 
           <div className={classes.palettes}>
             {palettes.map(palette => (
-              <MiniPalette {...palette} />
+              <MiniPalette 
+                {...palette} 
+                handleClick={() => this.goToPalette(palette.id)} 
+              />
             ))}
           </div>{/* /.palettes */}
         </div>{/* /.container */}
