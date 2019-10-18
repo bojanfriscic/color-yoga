@@ -12,7 +12,18 @@ const styles = {
   },
 
   colors: {
-    backgroundColor: '#ccc'
+    display: 'grid',
+    gridTemplateColumns: 'repeat(5, 1fr)',
+    gridTemplateRows: 'repeat(4, 1fr)',
+    height: '150px',
+    backgroundColor: '#dae1e4',
+    overflow: 'hidden',
+    borderRadius: '5px'
+  },
+
+  miniColor: {
+    width: '100%',
+    height: '100%'
   },
 
   title: {
