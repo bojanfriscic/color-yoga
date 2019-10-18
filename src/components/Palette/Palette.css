@@ -9,3 +9,9 @@
   grid-template-rows: repeat(4, 1fr);
   height: 90%;
 }
+
+.slider {
+  display: inline-block;
+  width: 21.25rem;
+  margin: 0 .625rem;
+}
