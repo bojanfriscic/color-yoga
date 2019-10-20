@@ -54,6 +54,14 @@
   letter-spacing: 1px;
 }
 
+.light-text {
+  color: #fff;
+}
+
+.color-box .dark-text {
+  color: #323232;
+}
+
 .see-more {
   position: absolute;
   right: 0;
