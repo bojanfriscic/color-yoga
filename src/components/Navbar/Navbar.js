@@ -27,7 +27,7 @@ class Navbar extends React.Component {
   }
   
   render() {
-    const { level, changeLevel } = this.props;
+    const { level, changeLevel, showingAllColors } = this.props;
     const { format, open } = this.state;
 
     return (
@@ -36,7 +36,7 @@ class Navbar extends React.Component {
           <Link to="/">React Palette</Link>
         </div>{/* /.logo */}
 
-        <div className="slider-container">
+        {showingAllColors && <div className="slider-container">
           <span>Level: {level}</span>
           <div className="slider">
             <Slider
@@ -47,7 +47,7 @@ class Navbar extends React.Component {
               onAfterChange={changeLevel}
             />
           </div>{/* ./slider */}
-        </div>{/* ./slider-container */}
+        </div>}{/* ./slider-container */}
 
         <div className="select-container">
           <Select 
