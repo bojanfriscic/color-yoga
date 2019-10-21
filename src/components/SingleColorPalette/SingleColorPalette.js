@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { withStyles } from '@material-ui/styles';
+import { styles } from './SingleColorPalette.styles';
 import Navbar from '../Navbar/Navbar';
 import ColorBox from '../ColorBox/ColorBox';
 import PaletteFooter from '../PaletteFooter/PaletteFooter';
@@ -18,7 +20,7 @@ class SingleColorPalette extends React.Component {
     let shades = [];
     let allColors = palette.colors;
 
-    for(let key in allColors) {
+    for (let key in allColors) {
       shades = shades.concat(
         allColors[key].filter(color => color.id === colorToFilterBy)
       );
@@ -34,10 +36,10 @@ class SingleColorPalette extends React.Component {
 
   render() {
     const { format } = this.state;
-    const { palette } = this.props;
+    const { palette, classes } = this.props;
 
     const colorBoxes = this._shades.map(color => (
-      <ColorBox 
+      <ColorBox
         key={color.name}
         name={color.name}
         background={color[format]}
@@ -46,30 +48,26 @@ class SingleColorPalette extends React.Component {
     ));
 
     return (
-      <div className="palette">
-        <Navbar 
-          handleChange={this.changeFormat} 
-          showingAllColors={false}
-        />
-        <div className="palette-colors single-color-palette">
+      <div className={classes.palette}>
+        <Navbar handleChange={this.changeFormat} showingAllColors={false} />
+        <div className={classes.singlePaletteColors}>
           {colorBoxes}
           <div className="color-box go-back">
-            <Link 
-              to={`/palette/${palette.id}`}
-              className="back-button"
-            >
+            <Link to={`/palette/${palette.id}`} className={classes.goBack}>
               Go Back
             </Link>
-          </div>{/* /.go-back */}
-        </div>{/* /.palette-colors */}
+          </div>
+          {/* /.go-back */}
+        </div>
+        {/* /.palette-colors */}
 
-        <PaletteFooter 
+        <PaletteFooter
           paletteName={palette.paletteName}
           emoji={palette.emoji}
         />
       </div>
-    )
+    );
   }
 }
 
-export default SingleColorPalette;
+export default withStyles(styles)(SingleColorPalette);
