@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Navbar.css';
-import Slider from 'rc-slider'
+import { withStyles } from '@material-ui/styles';
+import { styles } from './Navbar.styles';
+import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -25,65 +26,71 @@ class Navbar extends React.Component {
   closeSnackbar() {
     this.setState({ open: false });
   }
-  
+
   render() {
-    const { level, changeLevel, showingAllColors } = this.props;
+    const { level, changeLevel, showingAllColors, classes } = this.props;
     const { format, open } = this.state;
 
     return (
-      <header className="navbar">
-        <div className="logo">
+      <header className={classes.navbar}>
+        <div className={classes.logo}>
           <Link to="/">React Palette</Link>
-        </div>{/* /.logo */}
+        </div>
+        {/* /.logo */}
 
-        {showingAllColors && <div className="slider-container">
-          <span>Level: {level}</span>
-          <div className="slider">
-            <Slider
-              defaultValue={level}
-              min={100}
-              max={900}
-              step={100}
-              onAfterChange={changeLevel}
-            />
-          </div>{/* ./slider */}
-        </div>}{/* ./slider-container */}
+        {showingAllColors && (
+          <div className={classes.sliderContainer}>
+            <span>Level: {level}</span>
+            <div className={classes.slider}>
+              <Slider
+                defaultValue={level}
+                min={100}
+                max={900}
+                step={100}
+                onAfterChange={changeLevel}
+              />
+            </div>
+            {/* ./slider */}
+          </div>
+        )}
 
-        <div className="select-container">
-          <Select 
-            value={format}
-            onChange={this.handleFormatChange}
-          >
-            <MenuItem value="hex">HEX  - #ffffff</MenuItem>
+        <div className={classes.selectContainer}>
+          <Select value={format} onChange={this.handleFormatChange}>
+            <MenuItem value="hex">HEX - #ffffff</MenuItem>
             <MenuItem value="rgb">RGB - rgb(255,255,255)</MenuItem>
             <MenuItem value="rgba">RGBA - rgba(255,255,255,1)</MenuItem>
           </Select>
-        </div>{/* ./select-container */}
+        </div>
+        {/* ./select-container */}
 
-        <Snackbar 
+        <Snackbar
           anchorOrigin={{
             vertical: 'bottom',
-            horizontal: 'left'
-          }} 
+            horizontal: 'left',
+          }}
           open={open}
           autoHideDuration={3000}
-          message={<span id="message-id">Format changed to {format.toUpperCase()}</span>}
+          message={
+            <span id="message-id">
+              Format changed to {format.toUpperCase()}
+            </span>
+          }
           ContentProps={{ 'aria-describedby': 'message-id' }}
           onClose={this.closeSnackbar}
           action={[
-            <IconButton 
-              onClick={this.closeSnackbar} 
+            <IconButton
+              onClick={this.closeSnackbar}
               color="inherit"
               key="close"
               aria-label="close"
             >
               <CloseIcon />
-            </IconButton>
+            </IconButton>,
           ]}
         />
       </header>
-    )
+    );
   }
 }
 
-export default Navbar;
+export default withStyles(styles)(Navbar);
