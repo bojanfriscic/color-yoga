@@ -12,6 +12,11 @@ const styles = {
   },
 
   goBack: {
+    position: 'relative',
+    backgroundColor: '#000',
+  },
+
+  goBackButton: {
     display: 'inline-block',
     position: 'absolute',
     top: '50%',

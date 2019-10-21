@@ -52,8 +52,11 @@ class SingleColorPalette extends React.Component {
         <Navbar handleChange={this.changeFormat} showingAllColors={false} />
         <div className={classes.singlePaletteColors}>
           {colorBoxes}
-          <div className="color-box go-back">
-            <Link to={`/palette/${palette.id}`} className={classes.goBack}>
+          <div className={classes.goBack}>
+            <Link
+              to={`/palette/${palette.id}`}
+              className={classes.goBackButton}
+            >
               Go Back
             </Link>
           </div>
