@@ -5,13 +5,13 @@ import { withStyles } from '@material-ui/styles';
 import { styles } from './DraggableColorBox.styles';
 
 function DraggableColorBox(props) {
-  const { color, name, classes } = props;
+  const { color, name, classes, handleClick } = props;
 
   return (
     <div style={{ backgroundColor: color }} className={classes.root}>
       <div className={classes.boxContent}>
         <span>{name}</span>
-        <DeleteIcon className={classes.delete} />
+        <DeleteIcon className={classes.delete} onClick={handleClick} />
       </div>
     </div>
   );

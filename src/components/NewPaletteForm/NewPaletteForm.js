@@ -98,6 +98,14 @@ class NewPaletteForm extends React.Component {
     this.props.history.push('/');
   }
 
+  removeColor(colorName) {
+    const { colors } = this.state;
+
+    this.setState({
+      colors: colors.filter(color => color.name !== color.name),
+    });
+  }
+
   render() {
     const {
       open,
@@ -199,6 +207,7 @@ class NewPaletteForm extends React.Component {
                 key={color.name}
                 color={color.color}
                 name={color.name}
+                handleClick={() => this.removeColor(color.name)}
               />
             ))}
           </div>
