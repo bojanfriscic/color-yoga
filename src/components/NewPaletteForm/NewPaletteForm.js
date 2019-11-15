@@ -107,7 +107,7 @@ class NewPaletteForm extends React.Component {
     const { colors } = this.state;
 
     this.setState({
-      colors: colors.filter(color => color.name !== color.name),
+      colors: colors.filter(color => color.name !== colorName),
     });
   }
 
