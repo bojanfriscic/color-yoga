@@ -22,8 +22,9 @@ class NewPaletteForm extends React.Component {
     this.state = {
       open: true,
       currentColor: 'teal',
-      newName: '',
+      newColorName: '',
       colors: [],
+      newPaletteName: '',
     };
 
     this.handleDrawerOpen = this.handleDrawerOpen.bind(this);
@@ -35,6 +36,7 @@ class NewPaletteForm extends React.Component {
   }
 
   componentDidMount() {
+    // Check if color name (e.g. Corn flower blue) is unique for the palette
     ValidatorForm.addValidationRule('isColorNameUnique', value => {
       const { colors } = this.state;
       return colors.every(
@@ -42,9 +44,18 @@ class NewPaletteForm extends React.Component {
       );
     });
 
+    // Check if color hex (e.g. #666) is unique for the palette
     ValidatorForm.addValidationRule('isColorUnique', value => {
       const { colors, currentColor } = this.state;
       return colors.every(({ color }) => color !== currentColor);
+    });
+
+    // Check if the palette name (e.g. My Colors) is unique
+    ValidatorForm.addValidationRule('isPaletteNameUnique', value => {
+      const { palettes } = this.props;
+      return palettes.every(
+        ({ paletteName }) => paletteName.toLowerCase() !== value.toLowerCase()
+      );
     });
   }
 
@@ -61,26 +72,25 @@ class NewPaletteForm extends React.Component {
   }
 
   addNewColor() {
-    const { colors, currentColor, newName } = this.state;
+    const { colors, currentColor, newColorName } = this.state;
     const newColor = {
       color: currentColor,
-      name: newName,
+      name: newColorName,
     };
 
-    this.setState({ colors: [...colors, newColor], newName: '' });
+    this.setState({ colors: [...colors, newColor], newColorName: '' });
   }
 
   handleChange(e) {
-    this.setState({ newName: e.target.value });
+    this.setState({ [e.target.name]: e.target.value });
   }
 
   handleSubmit() {
-    const { colors } = this.state;
-    let newName = 'Test Palette';
+    const { colors, newPaletteName } = this.state;
 
     const newPalette = {
-      paletteName: newName,
-      id: newName.toLowerCase().replace(/ /g, '-'),
+      paletteName: newPaletteName,
+      id: newPaletteName.toLowerCase().replace(/ /g, '-'),
       colors,
     };
 
@@ -89,7 +99,13 @@ class NewPaletteForm extends React.Component {
   }
 
   render() {
-    const { open, currentColor, newName, colors } = this.state;
+    const {
+      open,
+      currentColor,
+      newColorName,
+      colors,
+      newPaletteName,
+    } = this.state;
     const { classes } = this.props;
 
     console.log(this.state);
@@ -110,13 +126,24 @@ class NewPaletteForm extends React.Component {
               <Typography variant="h6" color="inherit" noWrap>
                 Drawer
               </Typography>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={this.handleSubmit}
-              >
-                Save Palette
-              </Button>
+
+              <ValidatorForm onSubmit={this.handleSubmit}>
+                <TextValidator
+                  label="Palette Name"
+                  value={newPaletteName}
+                  name="newPaletteName"
+                  onChange={this.handleChange}
+                  validators={['required', 'isPaletteNameUnique']}
+                  errorMessages={[
+                    'Enter Palette Name',
+                    'Palette name must be unique',
+                  ]}
+                />
+
+                <Button variant="contained" color="primary" type="submit">
+                  Save Palette
+                </Button>
+              </ValidatorForm>
             </Toolbar>
           </AppBar>
 
@@ -146,7 +173,8 @@ class NewPaletteForm extends React.Component {
 
             <ValidatorForm onSubmit={this.addNewColor}>
               <TextValidator
-                value={newName}
+                value={newColorName}
+                name="newColorName"
                 onChange={this.handleChange}
                 validators={['required', 'isColorNameUnique', 'isColorUnique']}
                 errorMessages={[
