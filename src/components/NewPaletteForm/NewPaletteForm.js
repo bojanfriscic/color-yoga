@@ -108,8 +108,6 @@ class NewPaletteForm extends React.Component {
     } = this.state;
     const { classes } = this.props;
 
-    console.log(this.state);
-
     return (
       <div>
         <main className={classes.content}>
