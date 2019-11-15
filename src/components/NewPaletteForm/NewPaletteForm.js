@@ -59,6 +59,7 @@ class NewPaletteForm extends React.Component {
     });
   }
 
+  // Handles opening & closing the color picker drawer
   handleDrawerOpen() {
     this.setState({ open: true });
   }
@@ -67,10 +68,12 @@ class NewPaletteForm extends React.Component {
     this.setState({ open: false });
   }
 
+  // Sets the currentColor to the hex from the color picker
   updateCurrentColor(newColor) {
     this.setState({ currentColor: newColor.hex });
   }
 
+  // Adds all color data to the state in the colors array
   addNewColor() {
     const { colors, currentColor, newColorName } = this.state;
     const newColor = {
@@ -81,6 +84,7 @@ class NewPaletteForm extends React.Component {
     this.setState({ colors: [...colors, newColor], newColorName: '' });
   }
 
+  // Handles inputs & forms
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -98,6 +102,7 @@ class NewPaletteForm extends React.Component {
     this.props.history.push('/');
   }
 
+  // Removes color from the palette
   removeColor(colorName) {
     const { colors } = this.state;
 
