@@ -31,6 +31,7 @@ class NewPaletteForm extends React.Component {
     this.updateCurrentColor = this.updateCurrentColor.bind(this);
     this.addNewColor = this.addNewColor.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -73,6 +74,20 @@ class NewPaletteForm extends React.Component {
     this.setState({ newName: e.target.value });
   }
 
+  handleSubmit() {
+    const { colors } = this.state;
+    let newName = 'Test Palette';
+
+    const newPalette = {
+      paletteName: newName,
+      id: newName.toLowerCase().replace(/ /g, '-'),
+      colors,
+    };
+
+    this.props.savePalette(newPalette);
+    this.props.history.push('/');
+  }
+
   render() {
     const { open, currentColor, newName, colors } = this.state;
     const { classes } = this.props;
@@ -82,6 +97,29 @@ class NewPaletteForm extends React.Component {
     return (
       <div>
         <main className={classes.content}>
+          <CssBaseline />
+          <AppBar position="fixed" color="default">
+            <Toolbar disableGutters={!open}>
+              <IconButton
+                color="inherit"
+                aria-label="Open drawer"
+                onClick={this.handleDrawerOpen}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography variant="h6" color="inherit" noWrap>
+                Drawer
+              </Typography>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={this.handleSubmit}
+              >
+                Save Palette
+              </Button>
+            </Toolbar>
+          </AppBar>
+
           <Drawer variant="persistent" anchor="left" open={open}>
             <div>
               <IconButton onClick={this.handleDrawerClose}>
