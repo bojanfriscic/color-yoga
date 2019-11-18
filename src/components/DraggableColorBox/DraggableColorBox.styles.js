@@ -1,6 +1,7 @@
 const styles = {
   root: {
     position: 'relative',
+    height: '100%',
     cursor: 'pointer',
 
     '&:hover svg': {
