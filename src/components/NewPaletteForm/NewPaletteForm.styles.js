@@ -29,20 +29,13 @@ const styles = theme => ({
   content: {
     flexGrow: 1,
     height: 'calc(100vh - 64px)',
-    padding: '1.5rem',
     marginLeft: -drawerWidth,
-    /*transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),*/
+    transition: 'all .3s ease-in-out',
   },
 
   contentShift: {
     marginLeft: 0,
-    /*transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),*/
+    transition: 'all .3s ease-in-out',
   },
 
   boxContainer: {

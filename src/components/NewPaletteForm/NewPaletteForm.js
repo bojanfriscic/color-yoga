@@ -1,6 +1,7 @@
 import React from 'react';
 import { withStyles } from '@material-ui/styles';
 import { styles } from './NewPaletteForm.styles';
+import classNames from 'classnames';
 import PaletteFormNav from './PaletteFormNav';
 import ColorPickerForm from './ColorPickerForm';
 import Drawer from '@material-ui/core/Drawer';
@@ -111,13 +112,20 @@ class NewPaletteForm extends React.Component {
       <div className={classes.root}>
         <PaletteFormNav
           open={open}
-          classes={classes}
           palettes={palettes}
           handleSubmit={this.handleSubmit}
           handleDrawerOpen={this.handleDrawerOpen}
         />
 
-        <Drawer variant="persistent" anchor="left" open={open}>
+        <Drawer
+          variant="persistent"
+          anchor="left"
+          open={open}
+          className={classes.drawer}
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+        >
           <div className={classes.drawerHeader}>
             <IconButton onClick={this.handleDrawerClose}>
               <ChevronLeftIcon />
@@ -153,7 +161,11 @@ class NewPaletteForm extends React.Component {
           />
         </Drawer>
 
-        <main className={classes.content}>
+        <main
+          className={classNames(classes.content, {
+            [classes.contentShift]: open,
+          })}
+        >
           <div className={classes.drawerHeader} />
           <DraggableColorList
             colors={colors}
@@ -168,4 +180,4 @@ class NewPaletteForm extends React.Component {
   }
 }
 
-export default withStyles(styles)(NewPaletteForm);
+export default withStyles(styles, { withTheme: true })(NewPaletteForm);
