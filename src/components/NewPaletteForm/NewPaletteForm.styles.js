@@ -23,7 +23,7 @@ const styles = theme => ({
     justifyContent: 'flex-end',
     width: '100%',
     padding: '0 .5rem',
-    ...theme.mixins.toolbar,
+    //...theme.mixins.toolbar,
   },
 
   content: {
@@ -31,18 +31,18 @@ const styles = theme => ({
     height: 'calc(100vh - 64px)',
     padding: '1.5rem',
     marginLeft: -drawerWidth,
-    transition: theme.transitions.create('margin', {
+    /*transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
-    }),
+    }),*/
   },
 
   contentShift: {
     marginLeft: 0,
-    transition: theme.transitions.create('margin', {
+    /*transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
-    }),
+    }),*/
   },
 
   boxContainer: {
