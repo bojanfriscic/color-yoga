@@ -15,7 +15,18 @@ import MenuIcon from '@material-ui/icons/Menu';
 class PaletteFormNav extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      formShowing: false,
+    };
+
     this.handleChange = this.handleChange.bind(this);
+    this.showForm = this.showForm.bind(this);
+  }
+
+  // Show the submit form dialog
+  showForm() {
+    this.setState({ formShowing: true });
   }
 
   // Handles inputs & forms
@@ -24,6 +35,7 @@ class PaletteFormNav extends React.Component {
   }
 
   render() {
+    const { formShowing } = this.state;
     const { classes, open, palettes, handleSubmit } = this.props;
 
     return (
@@ -53,14 +65,29 @@ class PaletteFormNav extends React.Component {
           </Toolbar>
 
           <div className={classes.navBtns}>
-            <PaletteMetaForm palettes={palettes} handleSubmit={handleSubmit} />
             <Link to="/">
-              <Button variant="contained" color="secondary">
+              <Button
+                variant="contained"
+                color="secondary"
+                className={classes.button}
+              >
                 Go Back
               </Button>
             </Link>
+
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={this.showForm}
+              className={classes.button}
+            >
+              Save
+            </Button>
           </div>
         </AppBar>
+        {formShowing && (
+          <PaletteMetaForm palettes={palettes} handleSubmit={handleSubmit} />
+        )}
       </div>
     );
   }
