@@ -45,6 +45,15 @@ const styles = theme => ({
     height: '100%',
   },
 
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '90%',
+    height: '100%',
+  },
+
   buttons: {
     width: '100%',
   },

@@ -133,7 +133,9 @@ class NewPaletteForm extends React.Component {
           </div>
           <Divider />
           <div className={classes.container}>
-            <Typography variant="h4">Design your Palette</Typography>
+            <Typography variant="h4" gutterBottom>
+              Design your Palette
+            </Typography>
             <div className={classes.buttons}>
               <Button
                 variant="contained"
@@ -153,12 +155,12 @@ class NewPaletteForm extends React.Component {
                 {paletteIsFull ? 'Palette Full' : 'Random Color'}
               </Button>
             </div>
+            <ColorPickerForm
+              colors={colors}
+              paletteIsFull={paletteIsFull}
+              addNewColor={this.addNewColor}
+            />
           </div>
-          <ColorPickerForm
-            colors={colors}
-            paletteIsFull={paletteIsFull}
-            addNewColor={this.addNewColor}
-          />
         </Drawer>
 
         <main
