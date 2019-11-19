@@ -2,19 +2,16 @@ import React from 'react';
 import { withStyles } from '@material-ui/styles';
 import { styles } from './NewPaletteForm.styles';
 import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import DraggableColorList from '../DraggableColorList/DraggableColorList';
 import { ChromePicker } from 'react-color';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { arrayMove } from 'react-sortable-hoc';
+import PaletteFormNav from './PaletteFormNav';
 
 class NewPaletteForm extends React.Component {
   static defaultProps = {
@@ -29,7 +26,6 @@ class NewPaletteForm extends React.Component {
       currentColor: 'teal',
       newColorName: '',
       colors: this.props.palettes[0].colors,
-      newPaletteName: '',
     };
 
     this.handleDrawerOpen = this.handleDrawerOpen.bind(this);
@@ -56,14 +52,6 @@ class NewPaletteForm extends React.Component {
     ValidatorForm.addValidationRule('isColorUnique', value => {
       const { colors, currentColor } = this.state;
       return colors.every(({ color }) => color !== currentColor);
-    });
-
-    // Check if the palette name (e.g. My Colors) is unique
-    ValidatorForm.addValidationRule('isPaletteNameUnique', value => {
-      const { palettes } = this.props;
-      return palettes.every(
-        ({ paletteName }) => paletteName.toLowerCase() !== value.toLowerCase()
-      );
     });
   }
 
@@ -97,8 +85,8 @@ class NewPaletteForm extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  handleSubmit() {
-    const { colors, newPaletteName } = this.state;
+  handleSubmit(newPaletteName) {
+    const { colors } = this.state;
 
     const newPalette = {
       paletteName: newPaletteName,
@@ -144,52 +132,20 @@ class NewPaletteForm extends React.Component {
   }
 
   render() {
-    const {
-      open,
-      currentColor,
-      newColorName,
-      colors,
-      newPaletteName,
-    } = this.state;
-    const { classes, maxColors } = this.props;
+    const { open, currentColor, newColorName, colors } = this.state;
+    const { classes, maxColors, palettes } = this.props;
     const paletteIsFull = colors.length >= maxColors;
 
     return (
-      <div>
+      <div className={classes.root}>
         <main className={classes.content}>
-          <CssBaseline />
-          <AppBar position="fixed" color="default">
-            <Toolbar disableGutters={!open}>
-              <IconButton
-                color="inherit"
-                aria-label="Open drawer"
-                onClick={this.handleDrawerOpen}
-              >
-                <MenuIcon />
-              </IconButton>
-              <Typography variant="h6" color="inherit" noWrap>
-                Drawer
-              </Typography>
-
-              <ValidatorForm onSubmit={this.handleSubmit}>
-                <TextValidator
-                  label="Palette Name"
-                  value={newPaletteName}
-                  name="newPaletteName"
-                  onChange={this.handleChange}
-                  validators={['required', 'isPaletteNameUnique']}
-                  errorMessages={[
-                    'Enter Palette Name',
-                    'Palette name must be unique',
-                  ]}
-                />
-
-                <Button variant="contained" color="primary" type="submit">
-                  Save Palette
-                </Button>
-              </ValidatorForm>
-            </Toolbar>
-          </AppBar>
+          <PaletteFormNav
+            open={open}
+            classes={classes}
+            palettes={palettes}
+            handleSubmit={this.handleSubmit}
+            handleDrawerOpen={this.handleDrawerOpen}
+          />
 
           <Drawer variant="persistent" anchor="left" open={open}>
             <div>
