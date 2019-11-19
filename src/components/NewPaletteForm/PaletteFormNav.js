@@ -22,11 +22,17 @@ class PaletteFormNav extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.showForm = this.showForm.bind(this);
+    this.hideForm = this.hideForm.bind(this);
   }
 
   // Show the submit form dialog
   showForm() {
     this.setState({ formShowing: true });
+  }
+
+  // Hide the submit form dialog from the UI
+  hideForm() {
+    this.setState({ formShowing: false });
   }
 
   // Handles inputs & forms
@@ -86,7 +92,11 @@ class PaletteFormNav extends React.Component {
           </div>
         </AppBar>
         {formShowing && (
-          <PaletteMetaForm palettes={palettes} handleSubmit={handleSubmit} />
+          <PaletteMetaForm
+            palettes={palettes}
+            handleSubmit={handleSubmit}
+            hideForm={this.hideForm}
+          />
         )}
       </div>
     );
