@@ -1,4 +1,4 @@
-const drawerWidth = 400;
+import { DRAWER_WIDTH } from '../../constants';
 
 const styles = theme => ({
   root: {
@@ -18,8 +18,8 @@ const styles = theme => ({
   },
 
   appBarShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
+    width: `calc(100% - ${DRAWER_WIDTH}px)`,
+    marginLeft: DRAWER_WIDTH,
     transition: 'all .3s ease-in-out',
   },
 
