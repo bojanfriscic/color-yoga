@@ -3,8 +3,9 @@ const styles = {
     display: 'flex',
     alignItems: 'flex-start',
     justifyContent: 'center',
-    height: '100vh',
+    minHeight: '100vh',
     backgroundColor: 'cornflowerblue',
+    paddingBottom: '1.5rem',
   },
 
   container: {
