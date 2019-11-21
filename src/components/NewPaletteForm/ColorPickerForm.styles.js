@@ -14,6 +14,7 @@ const styles = {
   colorNameInput: {
     width: '100%',
     height: '3rem',
+    marginBottom: '1.5rem',
   },
 };
 

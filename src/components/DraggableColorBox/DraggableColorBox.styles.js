@@ -1,3 +1,5 @@
+import chroma from 'chroma-js';
+
 const styles = {
   root: {
     position: 'relative',
@@ -18,7 +20,7 @@ const styles = {
     bottom: 0,
     width: '100%',
     padding: '.625rem',
-    color: 'rgba(0,0,0,.5)',
+    color: props => (chroma(props.color).luminance() <= 0.8 ? '#fff' : '#000'),
     fontSize: '.75rem',
     textTransform: 'uppercase',
     letterSpacing: '1px',
