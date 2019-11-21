@@ -14,8 +14,8 @@ class MiniPalette extends React.Component {
   deletePalette(e) {
     e.stopPropagation();
 
-    const { id, handleDelete } = this.props;
-    handleDelete(id);
+    const { id, openDialog } = this.props;
+    openDialog(id);
   }
 
   render() {
