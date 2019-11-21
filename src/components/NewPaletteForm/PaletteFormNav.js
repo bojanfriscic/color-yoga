@@ -42,7 +42,13 @@ class PaletteFormNav extends React.Component {
 
   render() {
     const { formShowing } = this.state;
-    const { classes, open, palettes, handleSubmit } = this.props;
+    const {
+      classes,
+      open,
+      palettes,
+      handleSubmit,
+      handleDrawerOpen,
+    } = this.props;
 
     return (
       <div className={classes.root}>
@@ -58,7 +64,7 @@ class PaletteFormNav extends React.Component {
             <IconButton
               color="inherit"
               aria-label="Open drawer"
-              onClick={this.props.handleDrawerOpen}
+              onClick={handleDrawerOpen}
               className={classNames(classes.menuButton, {
                 [classes.hide]: open,
               })}
