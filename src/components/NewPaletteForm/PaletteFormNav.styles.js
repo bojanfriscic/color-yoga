@@ -1,4 +1,5 @@
 import { DRAWER_WIDTH } from '../../constants';
+import sizes from '../../sizes';
 
 const styles = theme => ({
   root: {
@@ -33,10 +34,18 @@ const styles = theme => ({
     '& a': {
       textDecoration: 'none',
     },
+
+    [sizes.down('xs')]: {
+      marginRight: '0.5rem',
+    },
   },
 
   button: {
     margin: '0 0.5rem',
+    [sizes.down('xs')]: {
+      margin: '0 0.25rem',
+      padding: '0.25rem',
+    },
   },
 });
 
