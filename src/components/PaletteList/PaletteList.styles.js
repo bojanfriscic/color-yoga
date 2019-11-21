@@ -1,6 +1,18 @@
 import sizes from '../../sizes';
 
 const styles = {
+  '@global': {
+    '.fade-exit': {
+      opacity: '1',
+    },
+
+    '.fade-exit-active': {
+      opacity: '0',
+      transform: 'translateY(3rem)',
+      transition: 'all .3s ease-out',
+    },
+  },
+
   root: {
     display: 'flex',
     alignItems: 'flex-start',
