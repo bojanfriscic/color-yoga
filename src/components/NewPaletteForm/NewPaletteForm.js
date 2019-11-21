@@ -12,6 +12,7 @@ import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import DraggableColorList from '../DraggableColorList/DraggableColorList';
 import { arrayMove } from 'react-sortable-hoc';
+import seedColors from '../../seedColors';
 
 class NewPaletteForm extends React.Component {
   static defaultProps = {
@@ -23,7 +24,7 @@ class NewPaletteForm extends React.Component {
 
     this.state = {
       open: true,
-      colors: this.props.palettes[0].colors,
+      colors: seedColors[0].colors,
     };
 
     this.handleDrawerOpen = this.handleDrawerOpen.bind(this);
