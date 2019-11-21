@@ -6,8 +6,12 @@ const styles = {
     alignItems: 'flex-start',
     justifyContent: 'center',
     minHeight: '100vh',
-    backgroundColor: 'cornflowerblue',
+    background: 'linear-gradient(to right, #283048, #859398)',
     paddingBottom: '1.5rem',
+  },
+
+  heading: {
+    fontSize: '1.875rem',
   },
 
   container: {
