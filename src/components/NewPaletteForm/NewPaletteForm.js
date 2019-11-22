@@ -13,6 +13,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import DraggableColorList from '../DraggableColorList/DraggableColorList';
 import { arrayMove } from 'react-sortable-hoc';
 import seedColors from '../../seedColors';
+import Seo from '../Seo/Seo';
 
 class NewPaletteForm extends React.Component {
   static defaultProps = {
@@ -106,75 +107,78 @@ class NewPaletteForm extends React.Component {
     const paletteIsFull = colors.length >= maxColors;
 
     return (
-      <div className={classes.root}>
-        <PaletteFormNav
-          open={open}
-          palettes={palettes}
-          handleSubmit={this.handleSubmit}
-          handleDrawerOpen={this.handleDrawerOpen}
-        />
-
-        <Drawer
-          variant="persistent"
-          anchor="left"
-          open={open}
-          className={classes.drawer}
-          classes={{
-            paper: classes.drawerPaper,
-          }}
-        >
-          <div className={classes.drawerHeader}>
-            <IconButton onClick={this.handleDrawerClose}>
-              <ChevronLeftIcon />
-            </IconButton>
-          </div>
-          <Divider />
-          <div className={classes.container}>
-            <Typography variant="h4" gutterBottom>
-              Design your Palette
-            </Typography>
-            <div className={classes.buttons}>
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={this.clearColors}
-                className={classes.button}
-              >
-                Clear Palette
-              </Button>
-              <Button
-                variant="contained"
-                color="primary"
-                disabled={paletteIsFull}
-                onClick={this.addRandomColor}
-                className={classes.button}
-              >
-                {paletteIsFull ? 'Palette Full' : 'Random Color'}
-              </Button>
-            </div>
-            <ColorPickerForm
-              colors={colors}
-              paletteIsFull={paletteIsFull}
-              addNewColor={this.addNewColor}
-            />
-          </div>
-        </Drawer>
-
-        <main
-          className={classNames(classes.content, {
-            [classes.contentShift]: open,
-          })}
-        >
-          <div className={classes.drawerHeader} />
-          <DraggableColorList
-            colors={colors}
-            removeColor={this.removeColor}
-            axis="xy"
-            onSortEnd={this.onSortEnd}
-            distance={20}
+      <>
+        <Seo title={'Design a new Palette'} />
+        <div className={classes.root}>
+          <PaletteFormNav
+            open={open}
+            palettes={palettes}
+            handleSubmit={this.handleSubmit}
+            handleDrawerOpen={this.handleDrawerOpen}
           />
-        </main>
-      </div>
+
+          <Drawer
+            variant="persistent"
+            anchor="left"
+            open={open}
+            className={classes.drawer}
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+          >
+            <div className={classes.drawerHeader}>
+              <IconButton onClick={this.handleDrawerClose}>
+                <ChevronLeftIcon />
+              </IconButton>
+            </div>
+            <Divider />
+            <div className={classes.container}>
+              <Typography variant="h4" gutterBottom>
+                Design your Palette
+              </Typography>
+              <div className={classes.buttons}>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={this.clearColors}
+                  className={classes.button}
+                >
+                  Clear Palette
+                </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  disabled={paletteIsFull}
+                  onClick={this.addRandomColor}
+                  className={classes.button}
+                >
+                  {paletteIsFull ? 'Palette Full' : 'Random Color'}
+                </Button>
+              </div>
+              <ColorPickerForm
+                colors={colors}
+                paletteIsFull={paletteIsFull}
+                addNewColor={this.addNewColor}
+              />
+            </div>
+          </Drawer>
+
+          <main
+            className={classNames(classes.content, {
+              [classes.contentShift]: open,
+            })}
+          >
+            <div className={classes.drawerHeader} />
+            <DraggableColorList
+              colors={colors}
+              removeColor={this.removeColor}
+              axis="xy"
+              onSortEnd={this.onSortEnd}
+              distance={20}
+            />
+          </main>
+        </div>
+      </>
     );
   }
 }

@@ -18,7 +18,7 @@ const styles = {
     alignItems: 'flex-start',
     justifyContent: 'center',
     minHeight: '100vh',
-    background: 'linear-gradient(to right, #283048, #859398)',
+    background: 'linear-gradient(to right, #67B26F, #4ca2cd)',
     paddingBottom: '1.5rem',
   },
 

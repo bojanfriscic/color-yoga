@@ -4,6 +4,7 @@ import { styles } from './Palette.styles';
 import Navbar from '../Navbar/Navbar';
 import ColorBox from '../ColorBox/ColorBox';
 import PaletteFooter from '../PaletteFooter/PaletteFooter';
+import Seo from '../Seo/Seo';
 
 class Palette extends React.Component {
   constructor(props) {
@@ -38,18 +39,21 @@ class Palette extends React.Component {
     ));
 
     return (
-      <div className={classes.palette}>
-        <Navbar
-          level={level}
-          changeLevel={this.changeLevel}
-          handleChange={this.changeFormat}
-          showingAllColors={true}
-        />
+      <>
+        <Seo title={paletteName} />
+        <div className={classes.palette}>
+          <Navbar
+            level={level}
+            changeLevel={this.changeLevel}
+            handleChange={this.changeFormat}
+            showingAllColors={true}
+          />
 
-        <div className={classes.paletteColors}>{colorBoxes}</div>
-        {/* ./palette-colors */}
-        <PaletteFooter paletteName={paletteName} emoji={emoji} />
-      </div>
+          <div className={classes.paletteColors}>{colorBoxes}</div>
+          {/* ./palette-colors */}
+          <PaletteFooter paletteName={paletteName} emoji={emoji} />
+        </div>
+      </>
     );
   }
 }

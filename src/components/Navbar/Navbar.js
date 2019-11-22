@@ -9,6 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
+import { SITENAME } from '../../constants';
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -34,7 +35,7 @@ class Navbar extends React.Component {
     return (
       <header className={classes.navbar}>
         <div className={classes.logo}>
-          <Link to="/">React Palette</Link>
+          <Link to="/">{SITENAME}</Link>
         </div>
         {/* /.logo */}
 
